@@ -1,53 +1,173 @@
-# Project 1 Guideline
+# Student Dropout Prediction
 
-1. Identify a supervised machine learning problem. 
-- You can choose any of the dataset in our Week 1-4 Dataset exploration discussion on Piazza. 
-- If you want to explore more selections, you can refer to data sources from our Piazza discussion. Regarding dataset from a kaggle competition or similar, you must provide more focus on model building and/or analysis to be a valid project (replicating what's in the kaggle kernel or other notebooks available online is not a valid project. You must implement other approaches and compare with those).
-- If you have a relationship with a company or organization who are willing to provide a project task or data, you're welcome to work on their problem (In this case, you might not need to share the data). 
-- If you find a research paper, you can replicate the experiments and implement your improved algorithm.
-2. Gather data: The data can be web-scraped, or downloaded from any sources as long as it's legal and ethical, and does not violate their policy or intellectual property/copyrights.
-3. Clean the data, do EDA (exploratory data analysis- e.g., inspecting and visualization of the data)
-4. Perform analysis using machine learning models of your choice. If your project involves making an webapp (not required), you can include the demo.
-5. Deliver the results: These deliverables serves two purposes - grade for this course and your project portfolio that you can show when you apply for jobs in the near futures.
+This project aims to predict student dropout using various machine learning models, including k-Nearest Neighbors (KNN), Decision Trees, Random Forests, and Support Vector Machines (SVM). The project includes data preprocessing, feature selection, model training, and evaluation to identify the most effective model for predicting student dropout.
 
-**[Deliverables]** 
-1. GitHub repo commits: Jupyter notebook showing a brief problem description, EDA procedure, analysis (model building and training), result and discussion/conclusion. If your work becomes large that it doesn't fit into one notebook (or you think it will be less readable by having one large notebook), you can make several notebooks or scripts in this git
-2. Moodle submission for feedback: a report-style notebook or pdf - with your name and the link to your project github repo. Also, in case your project doesn't fit into jupyter notebook format (e.g. you built an app that uses ML), write your approach as a report and submit in a pdf form
+## Table of Contents
 
-**[Optional]** You may choose to include short summary or recorded presentation or anything that you want to include/demonstrate. Be sure to be concise and clear. This optional step can be used as building your portfolio.
+- [Overview](#overview)
+- [Dataset](#dataset)
+- [Dependencies](#dependencies)
+- [Data Preprocessing](#data-preprocessing)
+- [Modeling](#modeling)
+  - [K-Nearest Neighbors (KNN)](#k-nearest-neighbors-knn)
+  - [Decision Tree Classifier](#decision-tree-classifier)
+  - [Random Forest Classifier](#random-forest-classifier)
+  - [Support Vector Machine (SVM)](#support-vector-machine-svm)
+- [Evaluation](#evaluation)
+- [Results](#results)
+- [Usage](#usage)
 
-Here is the rough steps:         
+## Overview
 
-1. **Step 1:** In the earlier phase, you were to make the initial selection of a data source and problem. In this stage, you're going to go through the initial data cleaning and EDA, and judge whether you need to collect more data or different data etc. Feel free to share and discuss your idea in the class discussion board.
 
-2. **Step 2:** Continue more EDA if needed. Start the main analysis (main analysis refers to *supervised learning tasks* such as classification or regression).You are on the right track if you start the main analysis at the latest end of the week 7 or earlier. Depending on your tasks, you may have one model or more. Generally, it is deemed to be a higher quality project if you compare multiple models and show your understanding of why certain model works better than the other or what limitations or cautions certain models may have (and for machine learning models, show enough effort on the hyperparameter optimization).
 
-3. **Step 3:** Continue more main analysis. Hyperparameter optimization. Compare results from your models. Wrap up.
+## Dataset
 
-4. **Step 4:** Wrap up and finalize your jupyter notebook write-up. (Optional: Prepare the presentation. Organize your git repository.) Submit the deliverables.
+The dataset used in this project contains various features related to students, including demographic information, academic performance, and socio-economic indicators. The target variable is `Target`, which represents the dropout status of the students. The dataset is provided in a CSV file named `dropout_data.csv`.
 
-### Defining project idea
-This is one of our three mini projects in this course. The purpose of mini projects is to apply skills you learned from each part. Therefore, choose a topic and data that are suitable for the methods/models we learned in each part. For example, the first mini project is about various supervised learning methods we learned: linear regression, logistic regression, KNN, decision trees, tree ensembles (random forest and boosting), and SVM. So the focus of the first mini project is using these methods and compare the performances, discuss pros and cons based on our theory (model's property) and observation about the data. Since we've practiced linear regression and logistic regression in another course, it is better to focus on other sophisticated models we learned (the rest). Also it is a great idea to compare those different methods. When you choose data, try to avoid data that's too simple or too complicated. We recommend to use tabulated data (avoid image and texts unless you know how to extract features- later you'll have an opportunity to work with images and texts so you can skip for now), or at least data that you can extract features easily. If the data is too messy (that require a lot of preprocessing and cleaning) perhaps it is wise to find other data. In terms of data shape, number of features less than 10 may be too simple. Also try to find data that has at least 500-1000 samples, since complex models tend to work better when there are more observations. It is ok to use large number of features 100+, but you may use a strategy of reducing features (e.g. feature selection or PCA) if it's too much and negatively impact your model(s).
-Also we recommend finding data from ML competition or data repositories rather than scraping from web or multiple sources yourself. Using well organized data will save your time as we have shorter (and frequent) timeline for mini projects than usual final project you may have seen in other classes. You can think of a mini project as a simpler project (that you can work in 1-2 weeks part time). So we recommend not to choose something too ambitious. But if you have time and interest, you're welcome to challenge yourself.
+## Dependencies
 
-### EDA procedure example (Steps 1-2)
-- Describe the data sources, the hypothesis or problem you which to analyze and then describe the factors or components that make up the dataset (The "factors" here is called "features" in the machine learning term. These factors are often columns in the tabulated data). For each factor, use a box-plot, scatter plot, histogram etc to describe the distribution of the data as appropriate.
-- Describe correlations between different factors of the dataset and justify your assumption that they are correlated or not correlated. You may use numeric or qualitative / graphical analysis for this step.
-- Determine if any data needs to be transformed. For example, if you're planning on using a SVM method for prediction, you may need to normalize or scale the data if there is considerable difference in the range of the data.
-- Using your hypothesis, indicate if it's likely that you should transform data, such as using a log transform or other transformation of the dataset.
-- You should determine if your data has outliers or needs to be cleaned in any way. Are there missing data values for specific factors? How will you handle the data cleaning? Will you discard, interpolate or otherwise substitute data values?
-- If you believe that specific factors will be more important than others in your analysis, you should mention which and why. You will use this to confirm your intuitions in your final writeup.
+To run this project, you need to have Python installed along with the necessary libraries. Follow the steps below to set up your environment:
 
-### How to find data
-There are a plethora of data resource these days. Here are a few popular (classic ML data) ones.     
-- [UCI ML data repository](https://archive.ics.uci.edu/ml/datasets.php): Their data is from researchers mostly and is relatively clean. Also the task types are mostly for classification or regression, therefore many of them are suitable for the scope of this course's project.     
-- [Kaggle](https://www.kaggle.com/): Perhaps one of the most popular data science/ML data repositories today, they have many interesting con-going or past competitions. But most of recent dataset/tasks will be beyond the scope of this course. Should you be still interested, choose problems that have tabulated data and classification or regression type tasks.     
-- [Data.gov](https://www.data.gov/) has many government sources of data. You can filter for a specific topic (e.g. Finance) and then restrict your attention to e.g. CSV data, which should be easier to process.
-- [Grand Challenge](https://grand-challenge.org/) has various biomed image computer vision competitions.
+1. Clone this repository:
+    ```bash
+    git clone https://github.com/will-foerster-portfolio/ML_StudentDropoutPredictor.git
+    ```
 
-Some internet blogs about list of dataset:     
-- https://medium.com/towards-artificial-intelligence/the-50-best-public-datasets-for-machine-learning-d80e9f030279
-- https://towardsdatascience.com/top-sources-for-machine-learning-datasets-bb6d0dc3378b
-- https://en.wikipedia.org/wiki/List_of_datasets_for_machine-learning_research
-- http://www.statsmodels.org/devel/datasets/index.html
-- https://pathmind.com/wiki/open-datasets
+2. Install the required Python libraries:
+    ```bash
+    pip install -r requirements.txt
+    ```
+## Data Preprocessing
+
+Data preprocessing steps include:
+
+- **Loading the dataset**: The dataset is loaded from the dropout_data.csv file using pandas.
+- **Dropping irrelevant features**: Features such as Marital status, Application order, Course, and others that do not contribute to the predictive modeling are removed.
+- **Filtering target variable**: Rows where the Target value is 'Enrolled' are removed, focusing only on students who either dropped out or completed.
+- **Encoding categorical variables**: Categorical variables are encoded into numerical format using LabelEncoder for compatibility with machine learning models.
+
+## Modeling
+
+### K-Nearest Neighbors (KNN)
+
+The K-Nearest Neighbors (KNN) algorithm is implemented from scratch in this project using a BallTree structure to efficiently find the nearest neighbors. The steps involved in the KNN modeling are:
+
+1. **Training the KNN Model**: The model is trained using the training dataset. The `KNN` class is designed to store training data and perform classification using the BallTree algorithm.
+   
+2. **Selecting the Optimal K**: Different values of K (the number of nearest neighbors) are tested to find the optimal value that maximizes the model’s accuracy. The model is evaluated on the validation set for each K value.
+
+3. **Predicting and Evaluating**: Once the optimal K is determined, the model is used to make predictions on the validation set. The accuracy, precision, and recall are calculated to evaluate the model's performance.
+
+### Decision Tree Classifier
+
+A Decision Tree Classifier is used to predict student dropout. The steps involved in this process are:
+
+1. **Training the Decision Tree**: The `DecisionTreeClassifier` from `scikit-learn` is used to train the model on the preprocessed training dataset.
+
+2. **Visualizing the Decision Tree**: The trained decision tree is visualized using `Graphviz` and `pydotplus` to understand the decision rules applied by the model. This helps in interpreting the model’s decision-making process.
+
+3. **Evaluating the Model**: The trained model is evaluated using the validation set. The evaluation metrics such as accuracy, precision, and recall are computed to assess the model’s effectiveness.
+
+### Random Forest Classifier
+
+The Random Forest Classifier, an ensemble learning method, is also applied to the dataset:
+
+1. **Training the Random Forest**: A `RandomForestClassifier` from `scikit-learn` is used to train the model on the training dataset. This classifier builds multiple decision trees and merges them together to get a more accurate and stable prediction.
+
+2. **Hyperparameter Tuning**: Hyperparameters such as the number of trees (`n_estimators`) and maximum depth of trees (`max_depth`) are tuned using `RandomizedSearchCV` to find the best combination of parameters for optimal model performance.
+
+3. **Evaluating the Model**: The best model, as determined by hyperparameter tuning, is evaluated using accuracy, precision, and recall metrics on the validation set.
+
+### Support Vector Machine (SVM)
+
+Support Vector Machines (SVM) are also utilized to predict dropout:
+
+1. **Training Different Kernels**: Four different SVM kernels—linear, polynomial, radial basis function (RBF), and sigmoid—are used to train the model. Each kernel can capture different types of relationships within the data.
+
+2. **Evaluating Each Kernel**: Each trained model is evaluated on the validation set using accuracy, precision, and recall to determine the performance of each kernel type.
+
+3. **Comparing Kernel Performance**: The results from each kernel are compared to identify which one provides the best predictive accuracy and overall performance for the dropout prediction task.
+
+## Evaluation
+
+To evaluate the performance of the models, several metrics are used:
+
+- **Accuracy**: The proportion of correctly predicted instances out of the total instances. It is a basic measure of model performance.
+  
+- **Precision**: The proportion of true positive predictions to the total number of positive predictions made by the model. It indicates the accuracy of the positive predictions.
+
+- **Recall**: The proportion of true positive predictions to the total actual positives in the dataset. It shows the model's ability to identify all the positive cases.
+
+- **Confusion Matrix**: A table used to describe the performance of a classification model by displaying the true positives, true negatives, false positives, and false negatives. It provides a more detailed performance analysis.
+
+Each model is evaluated on the validation set using these metrics to provide a comprehensive view of its performance.
+
+## Results
+
+### K-Nearest Neighbors (KNN)
+
+- **Best Accuracy**: 0.8077
+- **Best Precision**: 0.8486
+- **Best Recall**: 0.8077
+
+**Figure 3: Accuracy vs. Number of Neighbors** shows that the KNN model is most accurate when `k` is greater than or equal to 11, 12, 23, or 24. The model achieves a balance between accuracy and precision at these values, making it effective for predicting student dropout.
+
+### Decision Tree Classifier
+
+- **Best Accuracy**: 0.8769
+- **Best Precision**: 0.8817
+- **Best Recall**: 0.8769
+
+**Figure 4: max_depth vs. accuracy** illustrates that the Decision Tree model achieves its best accuracy when the maximum depth (`max_depth`) is set to 9. This indicates that a moderately deep tree provides the best balance between model complexity and generalization ability.
+
+### Random Forest Classifier
+
+- **Best Hyperparameters**: `{'max_depth': 16, 'n_estimators': 430}`
+- **Best Accuracy**: 0.8846
+- **Best Precision**: 0.8882
+- **Best Recall**: 0.8846
+
+The Random Forest Classifier achieves the highest accuracy among the models after hyperparameter tuning. With a maximum depth of 16 and 430 estimators, it balances both precision and recall effectively, as reflected in the confusion matrix and the evaluation metrics.
+
+### Support Vector Machine (SVM)
+
+- **Linear Kernel**:
+- **Accuracy**: 0.8692
+- **Precision**: 0.8884
+- **Recall**: 0.8692
+
+- **Polynomial Kernel**:
+- **Accuracy**: 0.7308
+- **Precision**: 0.7720
+- **Recall**: 0.7308
+
+- **Radial Basis Function (RBF) Kernel**:
+- **Accuracy**: 0.5385
+- **Precision**: 0.2899
+- **Recall**: 0.5385
+
+- **Sigmoid Kernel**:
+- **Accuracy**: 0.5077
+- **Precision**: 0.5042
+- **Recall**: 0.5077
+
+The SVM model with the **Linear Kernel** performs the best among the four kernels tested, with a high accuracy and precision. The **Polynomial Kernel** shows moderate performance, while the **RBF** and **Sigmoid Kernels** perform poorly, indicating they are less suitable for this specific classification task.
+
+### Summary
+
+The table below summarizes the performance of each model based on accuracy, precision, and recall:
+
+| Model                                  | Accuracy | Precision | Recall |
+|----------------------------------------|----------|-----------|--------|
+| Random Forest Classifier               | 0.8846   | 0.8882    | 0.8846 |
+| Decision Tree Classifier               | 0.8769   | 0.8817    | 0.8769 |
+| SVM (Linear Kernel)                    | 0.8692   | 0.8884    | 0.8692 |
+| K-Nearest Neighbors (K=11, 12, 23, 24) | 0.8077   | 0.8486    | 0.8077 |
+| SVM (Polynomial Kernel)                | 0.7308   | 0.7720    | 0.7308 |
+| SVM (RBF Kernel)                       | 0.5385   | 0.2899    | 0.5385 |
+| SVM (Sigmoid Kernel)                   | 0.5077   | 0.5042    | 0.5077 |
+
+The **Random Forest Classifier** demonstrates the best overall performance with an accuracy of 0.8846, followed closely by the **Decision Tree Classifier** and the **Support Vector Machine (Linear Kernel)** model. The **K-Nearest Neighbors (KNN)** also performs well but is slightly less accurate compared to the Random Forest and Decision Tree, and SVM (Linear Kernal)models. 
+
+Based on these results, the Random Forest Classifier is recommended for predicting student dropout due to its superior accuracy and balanced precision and recall scores.
